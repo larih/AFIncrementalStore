@@ -185,6 +185,7 @@ static inline void AFSaveManagedObjectContextOrThrowInternalConsistencyException
 - (NSManagedObjectContext *)backingManagedObjectContext {
     if (!_backingManagedObjectContext) {
         _backingManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        [_backingManagedObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSMergeByPropertyObjectTrumpMergePolicyType]];
         _backingManagedObjectContext.persistentStoreCoordinator = _backingPersistentStoreCoordinator;
         _backingManagedObjectContext.retainsRegisteredObjects = YES;
     }
